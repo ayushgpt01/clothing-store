@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userReducer from "./slices/userSlice";
@@ -11,15 +11,16 @@ const persistConfig = {
   blacklist: ["user"],
 };
 
-const persistedCategories = persistReducer(persistConfig, categoriesReducer);
-const persistedCart = persistReducer(persistConfig, cartReducer);
+const rootReducer = combineReducers({
+  user: userReducer,
+  categories: categoriesReducer,
+  cart: cartReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    user: userReducer,
-    categories: persistedCategories,
-    cart: persistedCart,
-  },
+  reducer: persistedReducer,
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
