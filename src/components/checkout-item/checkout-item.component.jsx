@@ -13,8 +13,8 @@ import {
   addItemToCart,
   removeItemFromCart,
   clearItemFromCart,
-} from "../../store/actions/cartActions";
-import { selectCartItems } from "../../store/selectors/cartSelector";
+} from "../../store/cart/cartActions";
+import { selectCartItems } from "../../store/cart/cartSelector";
 
 const CheckoutItem = ({ item }) => {
   const dispatch = useDispatch();

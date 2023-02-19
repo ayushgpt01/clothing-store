@@ -1,4 +1,4 @@
-import { addItemToCartReducer } from "../slices/cartSlice";
+import { addItemToCartReducer } from "./cartSlice";
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(

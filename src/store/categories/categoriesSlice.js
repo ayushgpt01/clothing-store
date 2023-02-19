@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 };
 
 export const categoriesSlice = createSlice({
-  name: "SET_CATEGORIES",
+  name: "CATEGORIES",
   initialState: INITIAL_STATE,
   reducers: {
     fetchCategoriesSuccess: (state, action) => {

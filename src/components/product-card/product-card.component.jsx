@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import { addItemToCart } from "../../store/actions/cartActions";
+import { addItemToCart } from "../../store/cart/cartActions";
 import {
   Image,
   CartButton,
   ProductCardContainer,
   Footer,
 } from "./product-card.styles";
-import { selectCartItems } from "../../store/selectors/cartSelector";
+import { selectCartItems } from "../../store/cart/cartSelector";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
