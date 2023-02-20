@@ -1,6 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { UserData } from "../../utils/firebase/firebase.utils";
+import type { UserState } from "./userTypes";
 
-const INITIAL_STATE = {
+const INITIAL_STATE: UserState = {
   currentUser: null,
   isLoading: false,
   error: null,
@@ -10,11 +12,11 @@ export const userSlice = createSlice({
   name: "USER",
   initialState: INITIAL_STATE,
   reducers: {
-    signInSuccess: (state, action) => {
+    signInSuccess: (state, action: PayloadAction<UserData>) => {
       state.currentUser = action.payload;
       state.isLoading = false;
     },
-    signInFailed: (state, action) => {
+    signInFailed: (state, action: PayloadAction<Error>) => {
       state.error = action.payload;
       state.isLoading = false;
     },
@@ -30,7 +32,7 @@ export const userSlice = createSlice({
     signUpUser: (state) => {
       state.isLoading = true;
     },
-    signUpFailed: (state, action) => {
+    signUpFailed: (state, action: PayloadAction<Error>) => {
       state.error = action.payload;
       state.isLoading = false;
     },
@@ -41,7 +43,7 @@ export const userSlice = createSlice({
       state.currentUser = null;
       state.isLoading = false;
     },
-    signOutFailed: (state, action) => {
+    signOutFailed: (state, action: PayloadAction<Error>) => {
       state.error = action.payload;
       state.isLoading = false;
     },

@@ -1,6 +1,8 @@
 import { addItemToCartReducer } from "./cartSlice";
+import { CartItem } from "./cartTypes";
+import { CategoryItem } from "../categories/categoriesType";
 
-const addCartItem = (cartItems, productToAdd) => {
+const addCartItem = (cartItems: CartItem[], productToAdd: CategoryItem) => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id
   );
@@ -16,7 +18,7 @@ const addCartItem = (cartItems, productToAdd) => {
   return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
-const removeCartItem = (cartItems, productToRemove) => {
+const removeCartItem = (cartItems: CartItem[], productToRemove: CartItem) => {
   const newCartItems = cartItems.map((item) =>
     item.id === productToRemove.id
       ? { ...productToRemove, quantity: productToRemove.quantity - 1 }
@@ -25,21 +27,30 @@ const removeCartItem = (cartItems, productToRemove) => {
   return newCartItems.filter((item) => item.quantity);
 };
 
-const clearCartItem = (cartItems, productToClear) => {
+const clearCartItem = (cartItems: CartItem[], productToClear: CartItem) => {
   return cartItems.filter((item) => item.id !== productToClear.id);
 };
 
-export const addItemToCart = (cartItems,productToAdd) => {
+export const addItemToCart = (
+  cartItems: CartItem[],
+  productToAdd: CategoryItem
+) => {
   const newCartItems = addCartItem(cartItems, productToAdd);
   return addItemToCartReducer(newCartItems);
 };
 
-export const removeItemFromCart = (cartItems,productToRemove) => {
+export const removeItemFromCart = (
+  cartItems: CartItem[],
+  productToRemove: CartItem
+) => {
   const newCartItems = removeCartItem(cartItems, productToRemove);
   return addItemToCartReducer(newCartItems);
 };
 
-export const clearItemFromCart = (cartItems,productToClear) => {
+export const clearItemFromCart = (
+  cartItems: CartItem[],
+  productToClear: CartItem
+) => {
   const newCartItems = clearCartItem(cartItems, productToClear);
   return addItemToCartReducer(newCartItems);
 };
