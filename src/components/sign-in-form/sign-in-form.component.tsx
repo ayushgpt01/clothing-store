@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import {
   googleSignInStart,
   emailSignInStart,
 } from "../../store/user/userSlice";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
-import FormInput from "../../components/form-input/form-input.component";
+import FormInput from "../form-input/form-input.component";
 import { SignInFormContainer, ButtonContainer } from "./sign-in-form.styles";
+import { AuthErrorCodes, AuthError } from "firebase/auth";
 
 const defaultFormFields = {
   email: "",
@@ -22,7 +23,7 @@ const SignInForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
@@ -31,7 +32,7 @@ const SignInForm = () => {
     dispatch(googleSignInStart());
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
@@ -39,12 +40,12 @@ const SignInForm = () => {
       resetFormFields();
     } catch (error) {
       if (
-        error.code === "auth/wrong-password" ||
-        error.code === "auth/user-not-found"
+        (error as AuthError).code === AuthErrorCodes.INVALID_PASSWORD ||
+        (error as AuthError).code === AuthErrorCodes.INVALID_EMAIL
       ) {
         alert("Wrong Email or Password");
       } else {
-        console.log(error.message);
+        console.log((error as AuthError).message);
       }
     }
   };

@@ -47,7 +47,7 @@ export function* signInWithGoogle() {
   }
 }
 
-type PayloadUserSignIn = {
+export type PayloadUserSignIn = {
   email: string;
   password: string;
 };
@@ -69,7 +69,7 @@ export function* signInWithEmail({
   }
 }
 
-type PayloadUserSignUp = {
+export type PayloadUserSignUp = {
   email: string;
   password: string;
   displayName: string;

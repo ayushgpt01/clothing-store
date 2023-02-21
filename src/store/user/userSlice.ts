@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { UserData } from "../../utils/firebase/firebase.utils";
 import type { UserState } from "./userTypes";
-
+import type { PayloadUserSignIn, PayloadUserSignUp } from "./userSaga";
 const INITIAL_STATE: UserState = {
   currentUser: null,
   isLoading: false,
@@ -26,10 +26,10 @@ export const userSlice = createSlice({
     googleSignInStart: (state) => {
       state.isLoading = true;
     },
-    emailSignInStart: (state) => {
+    emailSignInStart: (state, action: PayloadAction<PayloadUserSignIn>) => {
       state.isLoading = true;
     },
-    signUpUser: (state) => {
+    signUpUser: (state, action: PayloadAction<PayloadUserSignUp>) => {
       state.isLoading = true;
     },
     signUpFailed: (state, action: PayloadAction<Error>) => {
