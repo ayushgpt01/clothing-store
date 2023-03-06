@@ -14,6 +14,12 @@ export const CartButton = styled(Button)`
   position: absolute;
   top: 255px;
   display: none;
+  @media screen and (max-width: 800px) {
+    display: block;
+    opacity: 0.9;
+    min-width: unset;
+    padding: 0 10px;
+  }
 `;
 
 export const ProductCardContainer = styled.div`
@@ -34,6 +40,19 @@ export const ProductCardContainer = styled.div`
       display: flex;
     }
   }
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+    &:hover {
+      ${Image} {
+        opacity: unset;
+      }
+
+      ${CartButton} {
+        opacity: unset;
+      }
+    }
+  }
 `;
 
 export const Footer = styled.div`
@@ -50,5 +69,8 @@ export const Footer = styled.div`
 
   .price {
     width: 10%;
+  }
+  @media screen and (max-width: 800px) {
+    font-size: 14px;
   }
 `;

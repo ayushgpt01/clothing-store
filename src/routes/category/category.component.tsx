@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
@@ -8,7 +8,11 @@ import {
   SelectCategoriesIsLoading,
 } from "../../store/categories/categoriesSelector";
 import Spinner from "../../components/spinner/spinner.component";
-import { CategoryTitle, CategoryContainer } from "./category.styles";
+import {
+  CategoryTitle,
+  CategoryContainer,
+  CategoriesContainer,
+} from "./category.styles";
 
 type CategoryRouteParams = {
   category: string;
@@ -27,7 +31,7 @@ const Category = () => {
   }, [category, categoriesMap]);
 
   return (
-    <Fragment>
+    <CategoriesContainer>
       <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
       {isLoading ? (
         <Spinner />
@@ -39,7 +43,7 @@ const Category = () => {
             ))}
         </CategoryContainer>
       )}
-    </Fragment>
+    </CategoriesContainer>
   );
 };
 
