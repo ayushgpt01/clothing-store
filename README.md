@@ -1,4 +1,4 @@
-# Clothing Store
+# Crown Clothing
 
 This is a full-stack web application for an e-commerce clothing store, built using React, Redux, Firebase, and Stripe. The application allows users to browse different categories of clothing, add items to their cart, and securely checkout using Stripe payment processing.
 
